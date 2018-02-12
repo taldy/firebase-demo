@@ -1,0 +1,17 @@
+[debug] [2018-02-12T22:57:06.003Z] ----------------------------------------------------------------------
+[debug] [2018-02-12T22:57:06.005Z] Command:       /usr/local/bin/node /opt/npm/bin/firebase deploy
+[debug] [2018-02-12T22:57:06.006Z] CLI Version:   3.17.4
+[debug] [2018-02-12T22:57:06.006Z] Platform:      linux
+[debug] [2018-02-12T22:57:06.006Z] Node Version:  v6.10.0
+[debug] [2018-02-12T22:57:06.006Z] Time:          Tue Feb 13 2018 00:57:06 GMT+0200 (EET)
+[debug] [2018-02-12T22:57:06.006Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-12T22:57:06.017Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-12T22:57:06.017Z] > authorizing via signed-in user
+[debug] [2018-02-12T22:57:06.020Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fir-demo-4ecdc  
+  
+ Tue Feb 13 2018 00:57:06 GMT+0200 (EET)
+[debug] [2018-02-12T22:57:07.920Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-12T22:57:07.924Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fir-demo-4ecdc/tokens  
+  
+ Tue Feb 13 2018 00:57:07 GMT+0200 (EET)
