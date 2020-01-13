@@ -1,18 +1,12 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import * as firebaseui from 'firebaseui';
+
+import 'firebase/auth';
 import 'firebase/firestore';
 
-const config = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: ""
-};
+import firebaseConfig from './settings.json';
 
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
-firebase.firestore().enablePersistence()
-  .then(function() {
-    const db = firebase.firestore();
-  });
+export default firebase;
+export { firebaseui };
