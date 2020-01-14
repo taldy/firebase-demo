@@ -1,5 +1,7 @@
 .DS_Store
 node_modules
+/firebase/functions/node_modules
+.firebase
 /old
 /dist
 /src/firebase/settings.json

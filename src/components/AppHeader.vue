@@ -1,20 +1,21 @@
 <template>
   <div class="app-header">
     <div class="nav">
-      <router-link :to="{ name: 'home' }">Home</router-link>
+      <router-link :to="{ name: 'profile' }">Profile</router-link>
       <router-link :to="{ name: 'firestore' }">Firestore</router-link>
+      <router-link :to="{ name: 'benchmark' }">Benchmark</router-link>
     </div>
-    <router-link class="user-info" :to="{ name: 'profile' }">
-      <div v-if="user" class="user">
-        {{ user.displayName }}
-        <img
-          :src="user.photoURL"
-          class="avatar"
-        />
-      </div>
-      <div v-else>There is no logged in user</div>
-    </router-link>
-    <!-- <button type="button" name="button" @click="google">Login with google</button> -->
+
+    <h2>Firebase Demo</h2>
+
+    <div v-if="user" class="user">
+      {{ user.displayName }}
+      <img
+        :src="user.photoURL"
+        class="avatar"
+      />
+    </div>
+    <div v-else>There is no logged in user</div>
   </div>
 </template>
 
@@ -49,7 +50,7 @@ export default {
 
 <style scoped lang="scss">
 .app-header {
-  height: 60px;
+  height: 40px;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -68,8 +69,8 @@ export default {
 }
 
 .avatar {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   margin: 10px;
   border-radius: 50%;
 }

@@ -19,9 +19,6 @@
 <script>
 import firebase, { firebaseui } from '@/firebase';
 
-console.log('firebase', firebase);
-console.log('firebaseui', firebaseui);
-
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 export default {
@@ -48,9 +45,9 @@ export default {
       ui.start('#firebase-ui-container', {
         signInFlow: 'popup',
         signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID,
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
           firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ],
         credentialHelper: firebaseui.auth.CredentialHelper.NONE,
       });

@@ -1,17 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import Profile from '../views/Profile.vue';
 import Firestore from '../views/Firestore.vue';
+import Benchmark from '../views/Benchmark.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home,
-  },
   {
     path: '/profile',
     name: 'profile',
@@ -21,6 +16,15 @@ const routes = [
     path: '/firestore',
     name: 'firestore',
     component: Firestore,
+  },
+  {
+    path: '/benchmark',
+    name: 'benchmark',
+    component: Benchmark,
+  },
+  {
+    path: '*',
+    redirect: { name: 'profile' },
   },
 ];
 
