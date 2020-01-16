@@ -29,6 +29,7 @@ html, body, #app {
   color: #2c3e50;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 button {
@@ -48,6 +49,7 @@ input {
   padding: 7px 10px;
   border: solid 1px #999;
   border-radius: 5px;
+  outline: none;
 }
 
 .viewport {

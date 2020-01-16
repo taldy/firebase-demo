@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="nav">
       <router-link :to="{ name: 'profile' }">Profile</router-link>
-      <router-link :to="{ name: 'firestore' }">Firestore</router-link>
+      <router-link :to="{ name: 'todos' }">Todos</router-link>
       <router-link :to="{ name: 'benchmark' }">Benchmark</router-link>
     </div>
 
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import firebase from '@/firebase';
+import firebase, { auth } from '@/firebase';
 
 export default {
   name: 'app-header',
@@ -30,16 +30,16 @@ export default {
     };
   },
   mounted() {
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       console.log('authChanged', user);
       this.user = user;
     });
   },
   methods: {
     google() {
+      // eslint-disable-next-line
       const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
+      auth
         .signInWithPopup(provider)
         .then(() => console.log('success'))
         .catch(() => console.log('login error'));

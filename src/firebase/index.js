@@ -23,6 +23,9 @@ if (localStorage.firebasePersistence === 'true') {
 
 const firestore = firebase.firestore();
 const rtdb = firebase.database();
+const auth = firebase.auth();
 
 export default firebase;
-export { firebaseui, firestore, rtdb };
+export {
+  firebaseui, firestore, rtdb, auth,
+};

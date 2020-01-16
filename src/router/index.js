@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Profile from '../views/Profile.vue';
-import Firestore from '../views/Firestore.vue';
+import Todos from '../views/Todos.vue';
 import Benchmark from '../views/Benchmark.vue';
 
 Vue.use(VueRouter);
@@ -13,9 +13,9 @@ const routes = [
     component: Profile,
   },
   {
-    path: '/firestore',
-    name: 'firestore',
-    component: Firestore,
+    path: '/todos',
+    name: 'todos',
+    component: Todos,
   },
   {
     path: '/benchmark',
