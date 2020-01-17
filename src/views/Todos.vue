@@ -1,42 +1,46 @@
 <template>
-  <div class="firestore">
-    <h1>Todos</h1>
+  <div class="todos">
+    <div v-if="!loggedInUserId">
+      Please SignIn first...
+    </div>
+    <template v-else>
+      <h1>Todos</h1>
 
-    <section>
-      <input
-        type="text"
-        v-model="newTodoName"
-        @keypress.enter="createNewTodo"
-        placeholder="What needs to be done?"
-        class="new-todo"
-      />
+      <section>
+        <input
+          type="text"
+          v-model="newTodoName"
+          @keypress.enter="createNewTodo"
+          placeholder="What needs to be done?"
+          class="new-todo"
+        />
 
-      <ul class="todo-list">
-        <li
-          class="item"
-          v-for="todo in todos"
-          :key="todo.id"
-          :class="{ completed: todo.completed, 'not-mine': todo.author.uid !== loggedInUserId }"
-        >
-          <input
-            type="checkbox"
-            class="toggle"
-            :checked="todo.completed"
-            @change="toggle(todo.id)"
-          />
-          <label>{{ todo.title }}</label>
-          <button class="destroy" @click="remove(todo.id)"></button>
-        </li>
-      </ul>
-    </section>
+        <ul class="todo-list">
+          <li
+            class="item"
+            v-for="todo in todos"
+            :key="todo.id"
+            :class="{ completed: todo.completed, 'not-mine': todo.author.uid !== loggedInUserId }"
+          >
+            <input
+              type="checkbox"
+              class="toggle"
+              :checked="todo.completed"
+              @change="toggle(todo.id)"
+            />
+            <label>{{ todo.title }}</label>
+            <button class="destroy" @click="remove(todo.id)"></button>
+          </li>
+        </ul>
+      </section>
+    </template>
   </div>
 </template>
 
 <script>
 import { auth, firestore } from '@/firebase';
 
-const TODO = 'todo';
-const todosCollection = firestore.collection(TODO);
+const collection = firestore.collection('todos');
 
 export default {
   name: 'todos',
@@ -44,31 +48,40 @@ export default {
     return {
       todos: [],
       unsubscriber: null,
+      authUnsubscriber: null,
       newTodoName: '',
+      loggedInUserId: null,
     };
   },
-  computed: {
-    loggedInUserId() {
-      const { uid } = auth.currentUser || {};
-      return uid;
-    },
-  },
+  // computed: {
+  //   loggedInUserId() {
+  //     const { uid } = auth.currentUser || {};
+  //     return uid;
+  //   },
+  // },
   mounted() {
-    this.unsubscriber = todosCollection.orderBy('created', 'desc').onSnapshot((querySnapshot) => {
-      this.todos = [];
-      querySnapshot.forEach((doc) => {
-        this.todos.push({ id: doc.id, ...doc.data() });
-      });
+    this.authUnsubscriber = auth.onAuthStateChanged((user) => {
+      this.loggedInUserId = user && user.uid;
     });
   },
   destroyed() {
-    this.unsubscriber();
+    this.authUnsubscriber();
+    this.unwatchTodos();
+  },
+  watch: {
+    loggedInUserId(uid) {
+      if (uid) {
+        this.watchTodos();
+      } else {
+        this.unwatchTodos();
+      }
+    },
   },
   methods: {
     createNewTodo() {
       const { uid, displayName: name } = auth.currentUser || {};
 
-      todosCollection.add({
+      collection.add({
         title: this.newTodoName,
         completed: false,
         author: { uid, name },
@@ -79,10 +92,23 @@ export default {
     },
     toggle(id) {
       const todo = this.todos.find(item => item.id === id);
-      todosCollection.doc(id).update({ completed: !todo.completed });
+      collection.doc(id).update({ completed: !todo.completed });
     },
     remove(id) {
-      todosCollection.doc(id).delete();
+      collection.doc(id).delete();
+    },
+    watchTodos() {
+      this.unsubscriber = collection.orderBy('created', 'desc').onSnapshot((querySnapshot) => {
+        this.todos = [];
+        querySnapshot.forEach((doc) => {
+          this.todos.push({ id: doc.id, ...doc.data() });
+        });
+      });
+    },
+    unwatchTodos() {
+      if (this.unsubscriber) {
+        this.unsubscriber();
+      }
     },
   },
 };

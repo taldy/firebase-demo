@@ -4,6 +4,7 @@
       <router-link :to="{ name: 'profile' }">Profile</router-link>
       <router-link :to="{ name: 'todos' }">Todos</router-link>
       <router-link :to="{ name: 'benchmark' }">Benchmark</router-link>
+      <router-link :to="{ name: 'users' }">Users</router-link>
     </div>
 
     <h2>Firebase Demo</h2>
@@ -31,6 +32,7 @@ export default {
   },
   mounted() {
     auth.onAuthStateChanged((user) => {
+      // eslint-disable-next-line no-console
       console.log('authChanged', user);
       this.user = user;
     });
@@ -41,7 +43,9 @@ export default {
       const provider = new firebase.auth.GoogleAuthProvider();
       auth
         .signInWithPopup(provider)
+        // eslint-disable-next-line no-console
         .then(() => console.log('success'))
+        // eslint-disable-next-line no-console
         .catch(() => console.log('login error'));
     },
   },

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Profile from '../views/Profile.vue';
 import Todos from '../views/Todos.vue';
 import Benchmark from '../views/Benchmark.vue';
+import Users from '../views/Users.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/benchmark',
     name: 'benchmark',
     component: Benchmark,
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: Users,
   },
   {
     path: '*',

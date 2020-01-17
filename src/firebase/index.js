@@ -9,17 +9,13 @@ import firebaseConfig from './settings.json';
 
 firebase.initializeApp(firebaseConfig);
 
-if (localStorage.firebasePersistence === undefined) {
-  localStorage.firebasePersistence = true;
-}
-
-if (localStorage.firebasePersistence === 'true') {
-  firebase
-    .firestore()
-    .enablePersistence({ synchronizeTabs: true })
-    .then(() => console.log('Firestore persistence enabled successfully'))
-    .catch(err => console.log('Firestore persistence error', err));
-}
+firebase
+  .firestore()
+  .enablePersistence({ synchronizeTabs: true })
+  // eslint-disable-next-line no-console
+  .then(() => console.log('Firestore persistence enabled successfully'))
+  // eslint-disable-next-line no-console
+  .catch(err => console.log('Firestore persistence error', err));
 
 const firestore = firebase.firestore();
 const rtdb = firebase.database();
