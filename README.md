@@ -1,24 +1,28 @@
 # firebase-demo
 
-## Project setup
-```
-npm install
-```
+1. Create new project in [Firebase Console](https://console.firebase.google.com/ "Firebase Console")
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+2. Create new Web App in your project ([doc](https://firebase.google.com/docs/web/setup?authuser=1#register-app "doc"))
 
-### Compiles and minifies for production
-```
-npm run build
-```
+3. Enable Firebase services in Firebase Console
+3.1 Configure Auth Providers
+3.2 Create Firestore DB ([doc](https://firebase.google.com/docs/firestore/quickstart?authuser=1#create "doc"))
+3.3 Create Realtime Database (for benchmark page)
+3.4 Enable Hosting
+3.5 Enable Cloud Functions
 
-### Lints and fixes files
-```
-npm run lint
-```
+4. Copy `src/firebase/default.settings.json` to `src/firebase/settings.json` and put your just created App configuration inside.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+5. Install packages  `npm install -g firebase-tools` and `npm install`
+
+6. Attach your project to Firebase, run `firebase login` in project folder
+
+7. Run project locally with `npm start`
+
+8. Deploy to server with `npm run deploy`
+
+
+------------
+
+Based on [Firebase](https://firebase.google.com/ "Firebase") and [Vue](https://vuejs.org/ "Vue").
+Made for [Ardas](https://ardas-it.com/ "Ardas").
